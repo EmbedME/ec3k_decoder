@@ -1,0 +1,27 @@
+ec3k_decoder
+============
+
+Software decoder for EnergyCount 3000 devices using rtl-sdr.
+rtl_fm (part of rtl-sdr) is used to tune to the frequency of the
+energy sensors and to decode FM. The result of the fm decoding
+is piped into the ec3k decoder which outputs the decoding result
+to stdout in following csv format:
+Timestamp,Sensorid,Watts*10,WattSeconds
+
+Compile
+gcc ec3k_decoder.c -o ec3k_decoder
+
+Usage
+sudo rtl_fm -f 868402000 -s 200000 -A fast - | ./ec3k_decoder
+
+Example output:
+1378644760,70b2,37,132688308
+1378644764,71b2,1229,13643992
+1378644765,70b2,37,132688326
+1378644769,71b2,1104,13644589
+1378644770,70b2,38,132688345
+1378644774,71b2,627,13645072
+
+Runs on Raspberry Pi Rev B (rtl_fm consumes 19% of CPU, ec3k_decoder 10% CPU).
+
+Thomas Fischl <tfischl@gmx.de>
