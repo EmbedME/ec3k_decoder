@@ -117,8 +117,8 @@ int main(int argc, char **argv) {
 
                                      unsigned int id = (packetbuffer[0] & 0x0f) << (8 + 4) | (packetbuffer[1]) << 4 | (packetbuffer[2] ) >> 4;
                                      unsigned int wcurrent = (packetbuffer[15] & 0x0f) << (8 + 4) | (packetbuffer[16]) << 4 | (packetbuffer[17] ) >> 4;
-                                     unsigned long energy = ((packetbuffer[33] & 0x0f) << (8 + 4) | (packetbuffer[34]) << 4 | (packetbuffer[35] ) >> 4) << 28;
-                                     energy |= packetbuffer[12] << 20 | packetbuffer[13] << 12 | packetbuffer[14] << 4 | (packetbuffer[15] >> 4);
+                                     unsigned long energy = ((packetbuffer[33] & 0x0f) << (8 + 4) | (packetbuffer[34]) << 4 | (packetbuffer[35] ) >> 4);
+                                     energy = energy << 28 |packetbuffer[12] << 20 | packetbuffer[13] << 12 | packetbuffer[14] << 4 | (packetbuffer[15] >> 4);
 
                                      printf("%lu,%x,%i,%lu\n", (long)time(NULL), id, wcurrent, energy);
                                      fflush(stdout);
